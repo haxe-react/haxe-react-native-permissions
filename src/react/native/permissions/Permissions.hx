@@ -1,43 +1,33 @@
 package react.native.permissions;
 
+import js.Promise;
+import haxe.extern.EitherType;
+
 @:jsRequire('react-native-permissions')
 extern class Permissions {
-	public static function canOpenSettings():js.Promise<PermissionResponse>;
-	public static function openSettings():js.Promise<PermissionResponse>;
-	public static function getPermissionTypes():js.Promise<PermissionResponse>;
-	public static function getPermissionStatus(permission:AppPermission):js.Promise<PermissionResponse>;
-	public static function requestPermission(permission:AppPermission #if ios , ?options:AppPermissionOption #end):js.Promise<PermissionResponse>;
-	public static function checkMultiplePermissions(permissions:Array<AppPermission>):js.Promise<Array<PermissionResponse>>;
-}
-
-@:enum 
-abstract AppPermission(String) {
-	var Location = 'location';
-	var Camera = 'camera';
-	var Microphone = 'microphone';
-	var Storage = 'photo';
-	var Contacts = 'contacts';
-	var Event = 'event';
-	#if ios
-	var Reminder = 'reminder';
-	var Bluetooth = 'bluetooth';
-	var Notification = 'notification';
-	var BackgroundRefresh = 'backgroundRefresh';
-	#end 
+	public static function canOpenSettings():Promise<Bool>;
+	public static function openSettings():Void;
+	public static function getPermissionTypes():Promise<Array<PermissionType>>;
+	public static function getPermissionStatus(type:PermissionType):Promise<Response>;
+	public static function requestPermission(type:PermissionType #if ios , ?options:RequestOption #end):Promise<Response>;
+	public static function checkMultiplePermissions(types:Array<PermissionType>):Promise<Array<Response>>;
 }
 
 #if ios
+
+typedef RequestOption = EitherType<Location, Array<Notification>>;
+
 @:enum 
-abstract AppPermissionOption(String) {
+abstract Location(String) {
 	var Always = 'always';
 	var WhenInUse = 'whenInUse';
 }
-#end
 
-@:enum
-abstract PermissionResponse(String) {
-	var Authorized = 'authorized' ;
-	var Denied = 'denied'; 
-	#if ios var Restricted = 'restricted'; #end
-	var Undetermined = 'undetermined';
+@:enum 
+abstract Notification(String) {
+	var Alert = 'alert';
+	var Badge = 'badge';
+	var Sound = 'sound';
 }
+
+#end
