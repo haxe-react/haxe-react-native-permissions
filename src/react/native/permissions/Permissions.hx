@@ -3,7 +3,7 @@ package react.native.permissions;
 import js.Promise;
 import haxe.extern.EitherType;
 
-@:jsRequire('react-native-permissions', 'default')
+@:jsRequire('react-native-permissions')
 extern class Permissions {
 	public static function canOpenSettings():Promise<Bool>;
 	public static function openSettings():Void;
