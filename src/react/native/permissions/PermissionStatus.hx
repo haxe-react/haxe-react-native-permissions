@@ -1,7 +1,7 @@
 package react.native.permissions;
 
 @:enum
-abstract Response(String) {
+abstract PermissionStatus(String) {
 	var Authorized = 'authorized' ;
 	var Denied = 'denied'; 
 	#if ios var Restricted = 'restricted'; #end

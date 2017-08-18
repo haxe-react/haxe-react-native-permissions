@@ -2,20 +2,36 @@ package react.native.permissions;
 
 import js.Promise;
 import haxe.extern.EitherType;
+import haxe.DynamicAccess;
 
 @:jsRequire('react-native-permissions')
 extern class Permissions {
-	public static function canOpenSettings():Promise<Bool>;
+	
+	#if ios
+	@:overload(function(type:PermissionType, location:Location):Promise<PermissionStatus> {})
+	#end
+	public static function check(type:PermissionType):Promise<PermissionStatus>;
+	
+	#if ios
+	@:overload(function(type:PermissionType, notification:Array<Notification>):Promise<PermissionStatus> {})
+	@:overload(function(type:PermissionType, location:Location):Promise<PermissionStatus> {})
+	#end
+	public static function request(type:PermissionType):Promise<PermissionStatus>;
+	
+	public static function checkMultiple(types:Array<PermissionType>):Promise<DynamicAccess<PermissionStatus>>;
+	
+	public static function getTypes():Array<PermissionType>;
+	
+	#if ios
+	
 	public static function openSettings():Void;
-	public static function getPermissionTypes():Promise<Array<PermissionType>>;
-	public static function getPermissionStatus(type:PermissionType):Promise<Response>;
-	public static function requestPermission(type:PermissionType #if ios , ?options:RequestOption #end):Promise<Response>;
-	public static function checkMultiplePermissions(types:Array<PermissionType>):Promise<Array<Response>>;
+	
+	public static function canOpenSettings():Bool;
+	
+	#end
 }
 
 #if ios
-
-typedef RequestOption = EitherType<Location, Array<Notification>>;
 
 @:enum 
 abstract Location(String) {
