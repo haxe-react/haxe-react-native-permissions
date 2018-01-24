@@ -4,7 +4,7 @@ import js.Promise;
 import haxe.extern.EitherType;
 import haxe.DynamicAccess;
 
-@:jsRequire('react-native-permissions')
+@:jsRequire('react-native-permissions', 'default')
 extern class Permissions {
 	
 	#if ios
