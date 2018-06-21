@@ -26,7 +26,7 @@ extern class Permissions {
 	
 	public static function openSettings():Void;
 	
-	public static function canOpenSettings():Bool;
+	public static function canOpenSettings():js.Promise<Bool>;
 	
 	#end
 }

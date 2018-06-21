@@ -4,6 +4,6 @@ package react.native.permissions;
 abstract PermissionStatus(String) to String {
 	var Authorized = 'authorized' ;
 	var Denied = 'denied'; 
-	#if ios var Restricted = 'restricted'; #end
+	var Restricted = 'restricted';
 	var Undetermined = 'undetermined';
 }
