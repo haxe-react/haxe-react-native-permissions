@@ -22,13 +22,9 @@ extern class Permissions {
 	
 	public static function getTypes():Array<PermissionType>;
 	
-	#if ios
-	
 	public static function openSettings():Void;
 	
 	public static function canOpenSettings():js.Promise<Bool>;
-	
-	#end
 }
 
 #if ios
