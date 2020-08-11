@@ -5,16 +5,16 @@ import haxe.DynamicAccess;
 
 @:jsRequire('react-native-permissions')
 extern class Permissions {
-	static function check(type:PermissionType):js.Promise<PermissionStatus>;
-	static function openSettings():js.Promise<Dynamic>; // js.Promise<Void>
-	static function request(type:PermissionType,?rationale:Rationale):js.Promise<PermissionStatus>;
+	static function check(type:PermissionType):js.lib.Promise<PermissionStatus>;
+	static function openSettings():js.lib.Promise<Dynamic>; // js.lib.Promise<Void>
+	static function request(type:PermissionType,?rationale:Rationale):js.lib.Promise<PermissionStatus>;
 #if android
-	static function requestNotifications():js.Promise<NotificationsResponse>;
+	static function requestNotifications():js.lib.Promise<NotificationsResponse>;
 #end
 #if ios
-	static function requestNotifications(options:Array<NotificationOption>):js.Promise<NotificationsResponse>;
+	static function requestNotifications(options:Array<NotificationOption>):js.lib.Promise<NotificationsResponse>;
 #end
-	static function checkNotifications():js.Promise<NotificationsResponse>;
+	static function checkNotifications():js.lib.Promise<NotificationsResponse>;
 }
 
 typedef Rationale = {
